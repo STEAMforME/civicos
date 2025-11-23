@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicOS - Connect Your Community</title>
+    <meta name="description" content="Open-source civic engagement platform connecting residents to vital services">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #10b981;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f9fafb;
+            --border: #e5e7eb;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg-alt);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: var(--bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            background: var(--bg);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--bg-alt);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .feature-card p {
+            color: var(--text-light);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 4rem 0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .service-card {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .service-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+        
+        .service-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Events Section */
+        .events {
+            padding: 4rem 0;
+            background: var(--bg);
+        }
+        
+        .event-card {
+            background: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .event-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-card h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 4rem 0;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .features-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+        
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">🏛️ CivicOS</a>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Connect Your Community</h1>
+            <p>Find housing, jobs, healthcare, and community services all in one place</p>
+            <div class="cta-buttons">
+                <a href="#services" class="btn btn-primary">Browse Services</a>
+                <a href="#contact" class="btn btn-secondary">Get Beta Access</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Everything You Need</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏘️</div>
+                    <h3>Service Directory</h3>
+                    <p>Access housing assistance, job training, healthcare, legal aid, and youth programs in one centralized location.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Event Calendar</h3>
+                    <p>Discover community events, town halls, workshops, and activities. RSVP and get reminders.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📢</div>
+                    <h3>Issue Reporting</h3>
+                    <p>Report potholes, broken streetlights, graffiti, and other community issues directly to the city.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Community Forum</h3>
+                    <p>Connect with neighbors, share resources, ask questions, and build stronger communities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Multilingual</h3>
+                    <p>Available in English, Spanish, and 50+ languages to serve diverse communities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile First</h3>
+                    <p>Works perfectly on any device. Install as a progressive web app for offline access.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Find Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h4>🏠 Housing Assistance</h4>
+                    <p>Emergency shelter, rental assistance, affordable housing programs</p>
+                </div>
+                <div class="service-card">
+                    <h4>💼 Job Training</h4>
+                    <p>Career counseling, skills training, job placement services</p>
+                </div>
+                <div class="service-card">
+                    <h4>🏥 Healthcare</h4>
+                    <p>Free clinics, mental health services, health insurance enrollment</p>
+                </div>
+                <div class="service-card">
+                    <h4>⚖️ Legal Aid</h4>
+                    <p>Free legal consultation, tenant rights, immigration services</p>
+                </div>
+                <div class="service-card">
+                    <h4>🎓 Youth Programs</h4>
+                    <p>After-school programs, tutoring, STEAM education, mentorship</p>
+                </div>
+                <div class="service-card">
+                    <h4>🍲 Food Assistance</h4>
+                    <p>Food banks, meal programs, SNAP enrollment, nutrition classes</p>
+                </div>
+                <div class="service-card">
+                    <h4>👴 Senior Services</h4>
+                    <p>Senior centers, home care, Medicare assistance, transportation</p>
+                </div>
+                <div class="service-card">
+                    <h4>🔄 Reentry Support</h4>
+                    <p>Job placement, housing assistance, expungement services</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="event-card">
+                <div class="event-date">📅 Monday, November 25, 2025 | 6:00 PM</div>
+                <h4>Community Town Hall - Central Ward</h4>
+                <p>Join us for a discussion on neighborhood improvements and city initiatives. Location: Central Ward Community Center</p>
+            </div>
+            <div class="event-card">
+                <div class="event-date">📅 Wednesday, November 27, 2025 | 10:00 AM</div>
+                <h4>Free Job Fair</h4>
+                <p>Meet with 50+ employers hiring now. Bring your resume. Location: Newark Public Library</p>
+            </div>
+            <div class="event-card">
+                <div class="event-date">📅 Saturday, November 30, 2025 | 2:00 PM</div>
+                <h4>Youth STEAM Workshop</h4>
+                <p>Hands-on coding and robotics for ages 8-16. Free pizza included! Location: STEAM for ME NJ</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get Beta Access</h2>
+            <form class="contact-form" id="betaForm">
+                <div id="successMessage" class="success-message hidden">
+                    ✅ Thank you! We'll contact you soon about beta access.
+                </div>
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City *</label>
+                    <select id="city" name="city" required>
+                        <option value="">Select your city...</option>
+                        <option value="newark">Newark, NJ</option>
+                        <option value="irvington">Irvington, NJ</option>
+                        <option value="camden">Camden, NJ</option>
+                        <option value="new-brunswick">New Brunswick, NJ</option>
+                        <option value="detroit">Detroit, MI</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="role">I am a... *</label>
+                    <select id="role" name="role" required>
+                        <option value="">Select your role...</option>
+                        <option value="resident">Resident</option>
+                        <option value="nonprofit">Nonprofit Organization</option>
+                        <option value="government">Government Official</option>
+                        <option value="service-provider">Service Provider</option>
+                        <option value="developer">Developer/Tech Volunteer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="interest">What interests you most?</label>
+                    <textarea id="interest" name="interest" placeholder="Tell us what features or services you're most interested in..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; background: var(--primary); color: white;">Join Beta Program</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CivicOS</h4>
+                    <p>Open-source civic engagement platform connecting communities to vital services.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="https://github.com/STEAMforME/civicos">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Email: hello@steamforme.org</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Newark, NJ</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CivicOS by STEAM for ME NJ Inc. MIT Licensed. Built with ❤️ for communities.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Beta Form Submission
+        document.getElementById('betaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                city: document.getElementById('city').value,
+                role: document.getElementById('role').value,
+                interest: document.getElementById('interest').value
+            };
+            
+            // Log to console (in production, this would send to a backend)
+            console.log('Beta signup:', formData);
+            
+            // Show success message
+            document.getElementById('successMessage').classList.remove('hidden');
+            
+            // Reset form
+            this.reset();
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
