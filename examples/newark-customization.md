@@ -220,6 +220,6 @@ vercel --prod
 ---
 
 For help customizing CivicOS for Newark, contact:
-- Email: hello@steamforme.org
+- Email: CivicOS@steamforme.org
 - Organization: STEAM for ME NJ Inc
 - Phone: (555) 123-4567
