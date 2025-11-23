@@ -1,0 +1,30 @@
+{
+  "name": "civicos",
+  "version": "1.0.0",
+  "description": "Open-source civic engagement platform connecting residents to vital services",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STEAMforME/civicos.git"
+  },
+  "keywords": [
+    "civic-tech",
+    "community",
+    "services",
+    "government",
+    "open-source",
+    "engagement",
+    "311",
+    "nonprofit"
+  ],
+  "author": "STEAM for ME NJ Inc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/STEAMforME/civicos/issues"
+  },
+  "homepage": "https://github.com/STEAMforME/civicos#readme"
+}
